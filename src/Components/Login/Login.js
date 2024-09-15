@@ -1,21 +1,24 @@
+// src/Components/Login/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import './Login.css';
+import { useAuth } from '../../AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Redirect to dashboard or leaderboard
+      login(); // Set authentication state to true
       navigate('/dashboard'); // or '/leaderboard' based on user role
     } catch (error) {
       setError("Invalid email or password");

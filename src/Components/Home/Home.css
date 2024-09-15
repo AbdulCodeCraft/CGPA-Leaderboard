@@ -1,0 +1,23 @@
+.home-container {
+  padding: 20px;
+  text-align: center;
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(./../../assets/bg-Home.jpg);
+  background-size: cover; /* Ensures the image covers the whole screen */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Keeps the image fixed during scroll */
+  margin: 0; /* Removes any margin from the body */
+  height: 100vh; /* Ensures the body is the full viewport height */
+  color: white;
+}
+.home-container h1{
+  background-color: rgba(22, 19, 19, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+}
