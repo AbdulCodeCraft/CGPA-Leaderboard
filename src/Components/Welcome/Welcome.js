@@ -31,12 +31,9 @@ const Welcome = () => {
         </p>
       </div>
       <footer>
-  <p>Developed by <strong><a href="https://www.linkedin.com/in/ar-abdulrahman" target="_blank">Abdul Rahman A.</a></strong> | CSE Department</p>
-</footer>
-
+        <p>Developed by <strong><a href="https://www.linkedin.com/in/ar-abdulrahman" target="_blank" rel="noreferrer">Abdul Rahman A.</a></strong> | CSE Department</p>
+      </footer>
     </div>
-
-  
   );
 };
 

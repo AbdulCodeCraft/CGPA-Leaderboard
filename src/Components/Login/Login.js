@@ -1,4 +1,3 @@
-// src/Components/Login/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
@@ -10,7 +9,6 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -33,7 +31,6 @@ const Login = () => {
             Welcome back! Please log in to access your dashboard and stay updated with your academic performance.
           </p>
           {error && <Alert variant="danger">{error}</Alert>}
-          {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleLogin}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label className="text-light">Email</Form.Label>
