@@ -1,8 +1,10 @@
 // src/Components/Register/Register.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth, firestore } from '../../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import './Register.css';
 
 const Register = () => {
@@ -10,6 +12,8 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -24,47 +28,62 @@ const Register = () => {
         role: 'student' // Default role
       });
 
-      // Redirect to dashboard or login
+      setMessage("Account created successfully! You can now log in.");
+      // Redirect to login after a short delay
+      setTimeout(() => navigate('/login'), 3000);
     } catch (error) {
       setError("Error creating account: " + error.message);
     }
   };
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleRegister}>
-        <div className="input-container">
-          <label>Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="input-container">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="input-container">
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <Container className="mt-5 login-container">
+      <Row className="justify-content-md-center">
+        <Col md={6}>
+          <h2 className="text-center text-light">Register</h2>
+          <p className="text-center text-light">
+            Join us today! Create an account to access your dashboard and track your academic performance.
+          </p>
+          {error && <Alert variant="danger">{error}</Alert>}
+          {message && <Alert variant="success">{message}</Alert>}
+          <Form onSubmit={handleRegister}>
+            <Form.Group controlId="formBasicName">
+              <Form.Label className="text-light">Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="bg-dark text-light"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail" className="mt-3">
+              <Form.Label className="text-light">Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="bg-dark text-light"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword" className="mt-3">
+              <Form.Label className="text-light">Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="bg-dark text-light"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" className="mt-3" block>
+              Register
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
